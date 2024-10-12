@@ -16,6 +16,12 @@ Este repositório é ideal para quem deseja explorar a criação e o gerenciamen
 - **1026/TCP** - Orion-LD (Porta interna do Context Broker)
 - **27017/TCP** - MongoDB (Porta do banco de dados, recomenda-se não abrir para a internet)
 
+## Collection do Postman (Material para experimentação)
+
+Aqui você vai encontrar um conjunto de collections desenvolvidas para serem importadas pela ferramenta Postman. Essa collection vai ajudá-lo a interagir com os componentes do **FIWARE** e **NGSI-LD**.
+
+[Click aqui para acessar a collection do Postman]([https://link-para-collection](https://www.postman.com/fiware/fiware-foundation-ev-s-public-workspace/folder/gthdx5a/linked-data-using-orion-ld))
+
 
 ## Como usar:
 
