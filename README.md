@@ -20,8 +20,8 @@ Este repositório é ideal para quem deseja explorar a criação e o gerenciamen
 
 Aqui você vai encontrar um conjunto de collections desenvolvidas para serem importadas pela ferramenta Postman. Essa collection vai ajudá-lo a interagir com os componentes do **FIWARE** e **NGSI-LD**.
 
-[Click aqui para acessar a collection do Postman]([https://link-para-collection](https://www.postman.com/fiware/fiware-foundation-ev-s-public-workspace/folder/gthdx5a/linked-data-using-orion-ld))
-
+[Click aqui](https://www.postman.com/fiware/fiware-foundation-ev-s-public-workspace/folder/gthdx5a/linked-data-using-orion-ld)
+para acessar a collection do Postman
 [GitHub Pages](https://pages.github.com/)
 
 
