@@ -11,6 +11,12 @@ Este repositório contém uma implementação do FIWARE Orion-LD, utilizando a e
 
 Este repositório é ideal para quem deseja explorar a criação e o gerenciamento de dados contextuais no formato NGSI-LD e integrar com sistemas IoT ou aplicações baseadas em FIWARE.
 
+## Portas dos Serviços
+
+- **1026/TCP** - Orion-LD (Porta interna do Context Broker)
+- **27017/TCP** - MongoDB (Porta do banco de dados, recomenda-se não abrir para a internet)
+
+
 ## Como usar:
 
 1. Clone o repositório.
