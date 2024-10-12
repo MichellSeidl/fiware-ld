@@ -22,7 +22,6 @@ Aqui você vai encontrar um conjunto de collections desenvolvidas para serem imp
 
 [Click aqui](https://www.postman.com/fiware/fiware-foundation-ev-s-public-workspace/folder/gthdx5a/linked-data-using-orion-ld)
 para acessar a collection do Postman
-[GitHub Pages](https://pages.github.com/)
 
 
 ## Como usar:
