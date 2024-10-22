@@ -40,6 +40,20 @@ para acessar a collection do Postman
 | **Ciclo de Vida das Entidades**      | Simples (CRUD: Create, Read, Update, Delete) | Rico (CRUD + patch, relacionamento entre entidades, notificações semânticas) |
 | **Compatibilidade com NGSIv2**       | NGSIv2 é amplamente utilizado, mas com menor suporte semântico | NGSI-LD oferece compatibilidade via transcodificadores, mas a migração completa requer ajustes no modelo de dados |
 
+# IoT Agent Ultralight para Orion-LD
+
+## Descrição
+Este repositório contém a implementação do **IoT Agent Ultralight**, uma solução projetada para facilitar a integração de dispositivos IoT com a plataforma **Orion-LD**. O IoT Agent Ultralight traduz dados provenientes de dispositivos e sensores para o formato NGSI-LD, permitindo a comunicação eficiente e a gestão de dados em tempo real.
+
+## Funcionalidades
+- **Integração Simples**: Permite conectar dispositivos IoT de forma fácil e rápida ao Orion-LD.
+- **Suporte ao NGSI-LD**: Transforma dados de dispositivos em formato compatível com NGSI-LD, promovendo a interoperabilidade.
+- **Escalabilidade**: Suporta a adição de múltiplos dispositivos sem complicações, ideal para aplicações em larga escala.
+
+## Como Funciona
+O IoT Agent Ultralight atua como um intermediário entre dispositivos IoT e o Orion-LD. Ele recebe dados dos sensores em um formato simplificado e os converte para o formato NGSI-LD antes de enviá-los para a plataforma de gerenciamento. Isso permite que os dados sejam armazenados e consultados facilmente, proporcionando uma visão abrangente das informações coletadas.
+
+
 ## Como usar:
 
 1. Clone o repositório.
