@@ -53,6 +53,20 @@ Este repositório contém a implementação do **IoT Agent Ultralight**, uma sol
 ## Como Funciona
 O IoT Agent Ultralight atua como um intermediário entre dispositivos IoT e o Orion-LD. Ele recebe dados dos sensores em um formato simplificado e os converte para o formato NGSI-LD antes de enviá-los para a plataforma de gerenciamento. Isso permite que os dados sejam armazenados e consultados facilmente, proporcionando uma visão abrangente das informações coletadas.
 
+## Cygnus-LD
+
+O **Cygnus-LD** é um componente da plataforma FIWARE responsável por coletar, processar e persistir dados de contexto gerados pelo Orion-LD. Ele é utilizado para armazenar dados históricos, permitindo que eventos e mudanças no contexto sejam registrados e posteriormente analisados. O Cygnus-LD facilita a integração com diferentes sistemas de armazenamento, como bancos de dados relacionais, sistemas de arquivos e sistemas de processamento de big data, oferecendo flexibilidade na escolha do tipo de armazenamento de dados históricos.
+
+Na configuração padrão, o Cygnus-LD atua como um conector entre o Orion-LD e um banco de dados MongoDB, onde ele grava dados de contexto à medida que são atualizados no Orion-LD. Isso possibilita a criação de aplicações e relatórios baseados em séries temporais, essencial para sistemas que precisam manter um histórico de eventos para análises posteriores.
+
+### Principais Funcionalidades do Cygnus-LD
+
+- **Coleta de Dados de Contexto:** Recebe notificações de dados de contexto provenientes do Orion-LD.
+- **Persistência de Dados:** Armazena dados históricos em repositórios específicos, como MongoDB, para posterior consulta e análise.
+- **Processamento de Séries Temporais:** Facilita a construção de relatórios e análises sobre dados de contexto ao longo do tempo.
+
+O Cygnus-LD é configurável para atender a diferentes necessidades de armazenamento e, juntamente com o Orion-LD, é uma peça fundamental para soluções que necessitam de monitoramento contínuo e histórico dos dados em tempo real.
+
 
 ## Como usar:
 
