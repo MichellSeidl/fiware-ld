@@ -67,6 +67,9 @@ Na configuração padrão, o Cygnus-LD atua como um conector entre o Orion-LD e 
 
 O Cygnus-LD é configurável para atender a diferentes necessidades de armazenamento e, juntamente com o Orion-LD, é uma peça fundamental para soluções que necessitam de monitoramento contínuo e histórico dos dados em tempo real.
 
+## Arquitetura do FIWARE-LD
+
+![image](https://github.com/user-attachments/assets/fe75ec56-d729-4018-adfc-9f2c5a537c20)
 
 ## Como usar:
 
