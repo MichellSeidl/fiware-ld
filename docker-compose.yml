@@ -58,22 +58,22 @@ services:
       - mongo-db:/data
 
   # TimescaleDB for signal data
-  timescaledb:
-    image: timescale/timescaledb:latest-pg12
-    hostname: timescaledb
-    container_name: timescale-db
-    expose:
-      - "5432"
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=mysecretpassword
-      - POSTGRES_USER=timescale
-      - POSTGRES_DB=signals
-    volumes:
-      - timescale-data:/var/lib/postgresql/data
-    command: >
-      sh -c "sleep 10 && psql -U timescale -c 'CREATE EXTENSION IF NOT EXISTS timescaledb;'"
+  #timescaledb:
+  #  image: timescale/timescaledb:latest-pg12
+  #  hostname: timescaledb
+  #  container_name: timescale-db
+  #  expose:
+  #    - "5432"
+  #  ports:
+  #    - "5432:5432"
+  #  environment:
+  #    - POSTGRES_PASSWORD=mysecretpassword
+  #    - POSTGRES_USER=timescale
+  #    - POSTGRES_DB=signals
+  #  volumes:
+  #    - timescale-data:/var/lib/postgresql/data
+  #  command: >
+  #    sh -c "sleep 10 && psql -U timescale -c 'CREATE EXTENSION IF NOT EXISTS timescaledb;'"
 
   # QuantumLeap for historical data
   quantumleap:
