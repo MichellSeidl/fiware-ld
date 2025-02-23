@@ -6,7 +6,6 @@ services:
     container_name: fiware-orion-ld
     depends_on:
       - mongo-db
-      - timescaledb
     expose:
       - "1026"
     ports:
