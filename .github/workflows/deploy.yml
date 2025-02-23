@@ -19,6 +19,9 @@ jobs:
       - name: Configurar Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Instalar Docker Compose
+        run: sudo apt-get update && sudo apt-get install -y docker-compose
+
       - name: Verificar Sintaxe do docker-compose
         run: docker-compose config
 
