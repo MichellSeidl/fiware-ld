@@ -55,45 +55,6 @@ services:
     volumes:
       - mongo-db:/data
 
-  # TimescaleDB for signal data
-  timescaledb:
-    image: timescale/timescaledb:latest-pg12
-    hostname: timescaledb
-    container_name: timescale-db
-    expose:
-      - "5432"
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=mysecretpassword
-      - POSTGRES_USER=timescale
-      - POSTGRES_DB=signals
-    volumes:
-      - timescale-data:/var/lib/postgresql/data
-    command: >
-      sh -c "sleep 30 && psql -U timescale -c 'CREATE EXTENSION IF NOT EXISTS timescaledb;'"
-
-  # QuantumLeap for historical data
-  quantumleap:
-    image: fiware/quantum-leap
-    hostname: quantumleap
-    container_name: fiware-quantumleap
-    depends_on:
-      - timescaledb
-      - orion
-    expose:
-      - "8668"
-    ports:
-      - "8668:8668"
-    environment:
-      - QB_DATABROKER_HOST=timescaledb
-      - QB_DATABROKER_PORT=5432
-      - QB_DATABROKER_USER=timescale
-      - QB_DATABROKER_PASSWORD=mysecretpassword
-      - QB_DATABROKER_DB=signals
-      - QB_CB_HOST=orion
-      - QB_CB_PORT=1026
-
 volumes:
   mongo-db: ~
   timescale-data: ~
