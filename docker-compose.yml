@@ -10,19 +10,26 @@ services:
       - "1026:1026"
     depends_on:
       - mongo-db
-    command: -dbhost mongo-db -logLevel DEBUG
+    command: -dbhost mongo-db -logLevel DEBUG -dbuser fiware_admin -dbpwd S3gur@F1ware!
+    environment:
+      - ORIONLD_MONGO_HOST=mongo-db
+      - ORIONLD_MONGO_USER=fiware_admin
+      - ORIONLD_MONGO_PASS=S3gur@F1ware!
 
   mongo-db:
     image: mongo:4.0
     hostname: mongo-db
     container_name: db-mongo
     ports:
-      - "27017:27017" 
+      - "27017:27017"
     networks:
       - default
-    command: --nojournal
+    command: --auth --nojournal
     volumes:
       - mongo-db:/data
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: fiware_admin
+      MONGO_INITDB_ROOT_PASSWORD: S3gur@F1ware!
 
 volumes:
   mongo-db: ~
