@@ -30,5 +30,5 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=fiware_admin
       - MONGO_INITDB_ROOT_PASSWORD=Fiware!12fesa
 
-  volumes:
-    mongo-db: ~
+volumes:
+  mongo-db: ~
