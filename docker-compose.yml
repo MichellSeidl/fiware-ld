@@ -1,4 +1,3 @@
-version: "3.5"
 services:
   orion:
     image: fiware/orion-ld
@@ -16,6 +15,8 @@ services:
       - ORIONLD_MONGO_PASSWORD=Fiware!12fesa
       - ORIONLD_MONGO_DB=orion
     command: -dbhost mongo-db -logLevel DEBUG
+    networks:
+      - fiware_network
 
   mongo-db:
     image: mongo:4.0
@@ -24,11 +25,30 @@ services:
     ports:
       - "27017:27017"
     networks:
-      - default
+      - fiware_network
     command: --auth --nojournal
     environment:
       - MONGO_INITDB_ROOT_USERNAME=fiware_admin
       - MONGO_INITDB_ROOT_PASSWORD=Fiware!12fesa
 
+  node-red:
+    image: nodered/node-red
+    hostname: node-red
+    container_name: fiware-node-red
+    ports:
+      - "1880:1880"
+    depends_on:
+      - orion
+    environment:
+      - NODE_RED_ENABLE_PROJECTS=false
+    volumes:
+      - ./node-red-data:/data
+    networks:
+      - fiware_network
+
 volumes:
   mongo-db: ~
+
+networks:
+ fiware_network:
+   driver: bridge

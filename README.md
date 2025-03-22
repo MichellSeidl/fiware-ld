@@ -1,13 +1,14 @@
 # FIWARE-LD: Plataforma de Gestão de Dados Contextuais com NGSI-LD
 
-Este repositório contém uma implementação do FIWARE Orion-LD, utilizando a especificação **NGSI-LD** para gestão de dados contextuais em tempo real. Ele permite a orquestração de serviços essenciais com Docker e **docker-compose**, integrando o **Orion-LD** com o **MongoDB** para armazenamento de dados históricos.
+Este repositório contém uma implementação do FIWARE Orion-LD, utilizando a especificação **NGSI-LD** para gestão de dados contextuais em tempo real. Ele permite a orquestração de serviços essenciais com Docker e **docker-compose**, integrando o **Orion-LD**, **MongoDB** e **Node-RED** para armazenamento de dados contextuais.
 
 ## Recursos incluídos:
 
 - **Orion-LD**: Broker de Contexto compatível com NGSI-LD, permitindo a gestão e a consulta de entidades baseadas em contexto.
-- **MongoDB (v3.6)**: Base de dados para armazenamento de dados contextuais e persistência histórica.
+- **MongoDB (v4.0)**: Base de dados para armazenamento de dados contextuais.
+- **Node-RED**: Ferramenta para criação de fluxos de automação e integração com IoT.
 - Configuração de **docker-compose** para facilitar a orquestração e o gerenciamento dos containers.
-- Exposição do broker Orion-LD na porta **1027**, com MongoDB configurado para armazenamento persistente.
+- Exposição do broker Orion-LD na porta **1027**, com MongoDB configurado para armazenamento persistente e Node-RED acessível na porta **1880**.
 
 Este repositório é ideal para quem deseja explorar a criação e o gerenciamento de dados contextuais no formato NGSI-LD e integrar com sistemas IoT ou aplicações baseadas em FIWARE.
 
@@ -15,6 +16,7 @@ Este repositório é ideal para quem deseja explorar a criação e o gerenciamen
 
 - **1026/TCP** - Orion-LD (Porta interna do Context Broker)
 - **27017/TCP** - MongoDB (Porta do banco de dados, recomenda-se não abrir para a internet)
+- **1880/TCP** - Node-RED (Interface web para criação de fluxos IoT)
 
 ## Collection do Postman (Material para experimentação)
 
@@ -40,39 +42,21 @@ para acessar a collection do Postman
 | **Ciclo de Vida das Entidades**      | Simples (CRUD: Create, Read, Update, Delete) | Rico (CRUD + patch, relacionamento entre entidades, notificações semânticas) |
 | **Compatibilidade com NGSIv2**       | NGSIv2 é amplamente utilizado, mas com menor suporte semântico | NGSI-LD oferece compatibilidade via transcodificadores, mas a migração completa requer ajustes no modelo de dados |
 
-# IoT Agent Ultralight para Orion-LD
-
-## Descrição
-Este repositório contém a implementação do **IoT Agent Ultralight**, uma solução projetada para facilitar a integração de dispositivos IoT com a plataforma **Orion-LD**. O IoT Agent Ultralight traduz dados provenientes de dispositivos e sensores para o formato NGSI-LD, permitindo a comunicação eficiente e a gestão de dados em tempo real.
-
-## Funcionalidades
-- **Integração Simples**: Permite conectar dispositivos IoT de forma fácil e rápida ao Orion-LD.
-- **Suporte ao NGSI-LD**: Transforma dados de dispositivos em formato compatível com NGSI-LD, promovendo a interoperabilidade.
-- **Escalabilidade**: Suporta a adição de múltiplos dispositivos sem complicações, ideal para aplicações em larga escala.
-
-## Como Funciona
-O IoT Agent Ultralight atua como um intermediário entre dispositivos IoT e o Orion-LD. Ele recebe dados dos sensores em um formato simplificado e os converte para o formato NGSI-LD antes de enviá-los para a plataforma de gerenciamento. Isso permite que os dados sejam armazenados e consultados facilmente, proporcionando uma visão abrangente das informações coletadas.
-
-# Cygnus-LD
-
-O **Cygnus-LD** é um componente da plataforma FIWARE responsável por coletar, processar e persistir dados de contexto gerados pelo Orion-LD. Ele é utilizado para armazenar dados históricos, permitindo que eventos e mudanças no contexto sejam registrados e posteriormente analisados. O Cygnus-LD facilita a integração com diferentes sistemas de armazenamento, como bancos de dados relacionais, sistemas de arquivos e sistemas de processamento de big data, oferecendo flexibilidade na escolha do tipo de armazenamento de dados históricos.
-
-Na configuração padrão, o Cygnus-LD atua como um conector entre o Orion-LD e um banco de dados MongoDB, onde ele grava dados de contexto à medida que são atualizados no Orion-LD. Isso possibilita a criação de aplicações e relatórios baseados em séries temporais, essencial para sistemas que precisam manter um histórico de eventos para análises posteriores.
-
-## Principais Funcionalidades do Cygnus-LD
-
-- **Coleta de Dados de Contexto:** Recebe notificações de dados de contexto provenientes do Orion-LD.
-- **Persistência de Dados:** Armazena dados históricos em repositórios específicos, como MongoDB, para posterior consulta e análise.
-- **Processamento de Séries Temporais:** Facilita a construção de relatórios e análises sobre dados de contexto ao longo do tempo.
-
-O Cygnus-LD é configurável para atender a diferentes necessidades de armazenamento e, juntamente com o Orion-LD, é uma peça fundamental para soluções que necessitam de monitoramento contínuo e histórico dos dados em tempo real.
-
 ## Arquitetura do FIWARE-LD
 
 ![image](https://github.com/user-attachments/assets/fe75ec56-d729-4018-adfc-9f2c5a537c20)
 
 ## Como usar:
 
-1. Clone o repositório.
-2. Suba os containers com `docker-compose up`.
-3. Acesse o Orion-LD na porta **1027** e inicie a gestão de suas entidades contextuais.
+1. Clone o repositório:
+   ```sh
+   git clone https://github.com/MichellSeidl/fiware-ld.git
+   cd seu-repositorio
+   ```
+2. Suba os containers com Docker Compose:
+   ```sh
+   docker-compose up -d
+   ```
+3. Acesse os serviços:
+   - **Orion-LD**: `http://localhost:1026`
+   - **Node-RED**: `http://localhost:1880`
