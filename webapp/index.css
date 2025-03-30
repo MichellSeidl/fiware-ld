@@ -1,0 +1,121 @@
+:root {
+    --black: #26252B;
+    --blue: #01A5CB;
+    --white: #FFFFFC;
+    --yellow: #FEDA7A;
+}
+
+body {
+    background-color: var(--black);
+    color: var(--white);
+    letter-spacing: 0.1em;
+    overflow: hidden;
+    display: flex;
+    height: 100vh;
+}
+
+/* Estilos do menu lateral */
+#sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: var(--black);
+    color: var(--white);
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 14px;
+    text-align: left; 
+}
+
+#sidebar ul li button {
+    background: none;
+    border: none;
+    text-align: left;
+    color: var(--yellow);
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: left 0.3s ease;
+}
+
+#aluno-fujao{
+    top:-200px;
+    position: absolute;
+    height: 150px;
+    width: 100%;
+    z-index: 10000;
+    transition: top 0.3s ease;
+    border: var(--black) 1px solid;
+    border-radius: 0.375em;
+    background-color: var(--black);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+#analise-provedores{
+    top:-200px;
+    position: absolute;
+    height: 150px;
+    width: 100%;
+    z-index: 10000;
+    transition: top 0.3s ease;
+    border: var(--black) 1px solid;
+    border-radius: 0.375em;
+    background-color: var(--black);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+#toggle-menu:hover + #aluno-fujao {
+    top: 0px; 
+}
+
+
+/* Botão para abrir/fechar menu */
+#toggle-menu {
+    position: absolute;
+    top: 10px;
+    right: -50px;
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 0.375rem;
+    width: 50px;
+    height: 50px;
+    transition: right 0.3s ease;
+}
+
+/* Ajustando o conteúdo principal para acompanhar o menu */
+#main-content {
+    position: relative;
+    left: 0;
+    width: 100%;
+    transition: margin-left 0.3s ease;
+    padding: 20px;
+}
+
+/* Ajustando o mapa para respeitar a largura */
+#map {
+    width: 100%;
+    top: 40px;
+    height: calc(100vh - 100px);
+    margin-top: 20px;
+    border-radius: 0.375em;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+}
