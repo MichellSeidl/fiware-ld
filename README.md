@@ -7,6 +7,7 @@ Este repositório contém uma implementação do FIWARE Orion-LD, utilizando a e
 - **Orion-LD**: Broker de Contexto compatível com NGSI-LD, permitindo a gestão e a consulta de entidades baseadas em contexto.
 - **MongoDB (v4.0)**: Base de dados para armazenamento de dados contextuais.
 - **Node-RED**: Ferramenta para criação de fluxos de automação e integração com IoT.
+- **WebApp**: Serviço baseado em `nginx` para servir arquivos estáticos e configurações personalizadas.
 - Configuração de **docker-compose** para facilitar a orquestração e o gerenciamento dos containers.
 - Exposição do broker Orion-LD na porta **1027**, com MongoDB configurado para armazenamento persistente e Node-RED acessível na porta **1880**.
 
@@ -17,6 +18,24 @@ Este repositório é ideal para quem deseja explorar a criação e o gerenciamen
 - **1026/TCP** - Orion-LD (Porta interna do Context Broker)
 - **27017/TCP** - MongoDB (Porta do banco de dados, recomenda-se não abrir para a internet)
 - **1880/TCP** - Node-RED (Interface web para criação de fluxos IoT)
+- **8080/TCP** - WebApp (Serviço para servir arquivos estáticos via `nginx`)
+
+## Configuração do WebApp
+
+O serviço `webapp` utiliza a imagem oficial do `nginx` para servir arquivos estáticos e configurações personalizadas. O diretório `webapp` contém os arquivos HTML, CSS e JS, além de um arquivo `nginx.conf` para configurar o comportamento do servidor.
+
+### 🌐 Proxy Reverso com NGINX
+
+O serviço `webapp` utiliza o NGINX para:
+
+- Servir a interface estática (HTML, JS, etc.).
+- Redirecionar chamadas para o Orion-LD via `/orion-api/`, com suporte a CORS.
+
+### Exemplo de chamada para o broker via proxy:
+
+```plaintext
+http://localhost:8080/orion-api/ngsi-ld/v1/entities
+
 
 ## Collection do Postman (Material para experimentação)
 
@@ -60,3 +79,84 @@ para acessar a collection do Postman
 3. Acesse os serviços:
    - **Orion-LD**: `http://localhost:1026`
    - **Node-RED**: `http://localhost:1880`
+
+
+## 🎓 Experimentos do Projeto de TCC
+
+Este repositório também inclui experimentos desenvolvidos como parte de um Trabalho de Conclusão de Curso (TCC), focados em aplicações práticas da plataforma **FIWARE-LD** para monitoramento em tempo real e análise de dados contextuais com uso de sensores embarcados em dispositivos móveis.
+
+---
+
+### 📊 Dashboard de Monitoramento
+
+**Objetivo:** Oferecer uma interface amigável para visualização e análise dos dados coletados.
+
+**Componentes:**
+### 📡 Sensores e Dados Coletados
+
+Os dispositivos utilizados nos experimentos foram configurados para coletar os seguintes dados:
+
+- **Device ID**
+- **Marca**
+- **Modelo**
+- **Localização GPS**
+- **Última Medição**
+- **Provedor SIM**
+- **Tipo de Sinal**
+- **Intensidade de Sinal**
+- **Barômetro**
+- **Magnetômetro (x, y, z)**
+- **Contador de Passos**
+- **Nível de Ruído**
+- **Umidade**
+- **Temperatura**
+- **Luz Ambiente**
+
+**Ferramentas:**
+- **Node-RED** para exibição dos dados coletados dos dispositivos móveis
+
+![image](images/Experiencia1.png)
+
+---
+
+### 🧭 Experimento “Aluno Fujão”
+
+**Objetivo:** Detectar saídas não autorizadas de estudantes de áreas delimitadas (ex: faculdade).
+
+**Descrição:**
+- Cada dispositivo reporta sua localização ao Orion-LD periodicamente
+- Verificação se o ponto está dentro de um **raio geográfico definido**
+- Se um aluno sair do raio, um alerta é gerado
+
+**Tecnologias:**
+- **FIWARE Orion-LD** para ingestão de dados
+- **MongoDB** para armazenamento
+- **Leaflet** para visualização do mapa em tempo real
+
+![image](images/Experiencia2.png)
+
+---
+
+### 🔍 Análise de Provedores de Telefonia
+
+**Objetivo:** Mapear a intensidade de sinal de operadoras (Vivo, Claro, TIM) usando crowdsourcing.
+
+**Descrição:**
+- Coleta de dados realizada por dispositivos móveis com sensores de:
+  - Intensidade de sinal
+  - Localização (GPS)
+  - Tipo de rede (4G, 5G, LTE)
+  
+- Dados enviados ao **Orion-LD** 
+- Persistência em **MongoDB** 
+- Visualização com **Leaflet**
+
+**Resultados:**
+- Mapas interativos com a cobertura de sinal por operadora
+- Identificação de áreas de baixa cobertura
+
+![image](images/Experiencia3.png)
+
+---
+
+Essas experiências demonstram o potencial da plataforma **FIWARE-LD** para aplicações inteligentes, especialmente em contextos de **cidades inteligentes**, **educação conectada** e **monitoramento de infraestrutura urbana**.
