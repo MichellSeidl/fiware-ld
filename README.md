@@ -35,6 +35,7 @@ O serviço `webapp` utiliza o NGINX para:
 
 ```plaintext
 http://localhost:8080/orion-api/ngsi-ld/v1/entities
+```
 
 
 ## Collection do Postman (Material para experimentação)
@@ -63,7 +64,7 @@ para acessar a collection do Postman
 
 ## Arquitetura do FIWARE-LD
 
-![image](https://github.com/user-attachments/assets/fe75ec56-d729-4018-adfc-9f2c5a537c20)
+![image](images/Arquitetura%20FIWARE.png)
 
 ## Como usar:
 
@@ -79,6 +80,14 @@ para acessar a collection do Postman
 3. Acesse os serviços:
    - **Orion-LD**: `http://localhost:1026`
    - **Node-RED**: `http://localhost:1880`
+
+## Links de Produção
+
+Experiencia 1:
+http://20.206.200.173:1880/ui/
+
+Experiencia 2 e 3 
+http://20.206.200.173:8080/
 
 
 ## 🎓 Experimentos do Projeto de TCC
