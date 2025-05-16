@@ -64,7 +64,7 @@ para acessar a collection do Postman
 
 ## Arquitetura do FIWARE-LD
 
-![image](images/Arquitetura%20FIWARE.png)
+![image](images/Arquitetura-FIWARE.png)
 
 ## Como usar:
 
@@ -124,7 +124,7 @@ Os dispositivos utilizados nos experimentos foram configurados para coletar os s
 **Ferramentas:**
 - **Node-RED** para exibição dos dados coletados dos dispositivos móveis
 
-![image](images/Experiencia1.png)
+![image](images/Experiencia_1.png)
 
 ---
 
@@ -142,7 +142,7 @@ Os dispositivos utilizados nos experimentos foram configurados para coletar os s
 - **MongoDB** para armazenamento
 - **Leaflet** para visualização do mapa em tempo real
 
-![image](images/Experiencia2.png)
+![image](images/Experiencia_2.png)
 
 ---
 
@@ -164,7 +164,7 @@ Os dispositivos utilizados nos experimentos foram configurados para coletar os s
 - Mapas interativos com a cobertura de sinal por operadora
 - Identificação de áreas de baixa cobertura
 
-![image](images/Experiencia3.png)
+![image](images/Experiencia_3.png)
 
 ---
 
