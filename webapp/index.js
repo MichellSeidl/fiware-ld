@@ -1,15 +1,12 @@
 // Inicializa o mapa na posição central do Brasil
-var map = L.map('map').setView([-14.235, -51.9253], 4);
-
-let clickedAlunoFujao = false;
-let clickedAnaliseProvedores = false;
-let alunoMarker;
+var map = L.map('map').setView([-15.5, -53.5], 4);
 
 // Adiciona o OpenStreetMap como base do mapa
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
+let alunoMarker;
 let mainMarker = null;
 let mainCircle = null;
 let mainLat = null;
@@ -108,24 +105,6 @@ function addMainPoint() {
     map.setView([mainLat, mainLng], 13);
 }
 
-// Função para calcular a distância entre dois pontos
-function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
-    var R = 6371000; // Raio da Terra em metros
-    var dLat = deg2rad(lat2 - lat1);
-    var dLon = deg2rad(lon2 - lon1);
-    var a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var distance = R * c; // Distância em metros
-    return distance;
-}
-
-function deg2rad(deg) {
-    return deg * (Math.PI / 180);
-}
-
 function increment(id) {
     let step = (id == 'distance') ? 1 : 0.1;
     let oldValue = parseFloat(document.getElementById(id).value) ?? 0;
@@ -133,11 +112,12 @@ function increment(id) {
     if (isNaN(oldValue)) {
         newValue = 0;
     } else {
-        newValue = (id == 'distance') ? (oldValue + step).toFixed(0) : (oldValue + step).toFixed(4);
+        newValue = (id == 'distance') ? (oldValue + step).toFixed(1) : (oldValue + step).toFixed(4);
     }
 
     document.getElementById(id).value = newValue;
 }
+
 function decrement(id) {
     let step = (id == 'distance') ? 1 : 0.1;
     let oldValue = parseFloat(document.getElementById(id).value);
@@ -145,7 +125,7 @@ function decrement(id) {
     if (isNaN(oldValue)) {
         newValue = 0;
     } else {
-        newValue = (id == 'distance') ? (oldValue - step).toFixed(0) : (oldValue - step).toFixed(4);
+        newValue = (id == 'distance') ? (oldValue - step).toFixed(1) : (oldValue - step).toFixed(4);
     }
 
     if (id == 'distance' && newValue < 0) newValue = 0;
@@ -153,152 +133,66 @@ function decrement(id) {
     document.getElementById(id).value = newValue;
 }
 
-function hoverAlunoFujao(isHovered) {
-    const alunoFujao = document.getElementById('aluno-fujao');
-    if (isHovered) {
-        alunoFujao.style.top = '0px';
-    } else {
-        alunoFujao.style.top = '-200px';
-    }
-}
-
-function hoverAnaliseProvedores(isHovered) {
-    if (mainMarker) map.removeLayer(mainMarker);
-    if (mainCircle) map.removeLayer(mainCircle);
-    const analiseProvedores = document.getElementById('analise-provedores');
-    if (isHovered) {
-        analiseProvedores.style.top = '0px';
-    } else {
-        analiseProvedores.style.top = '-200px';
-    }
-}
-
-/* index.js */
+// Chamando a função ao iniciar a página
+document.addEventListener("DOMContentLoaded", carregarDispositivos);
+document.addEventListener("DOMContentLoaded", carregarProvedores);
 document.addEventListener("DOMContentLoaded", function () {
     const sidebar = document.getElementById("sidebar");
-    const toggleMenuButton = document.getElementById("toggle-menu");
-    const alunoFujaoSection = document.getElementById("aluno-fujao");
-    const alunoFujaoButton = document.getElementById("aluno-fujao-button");
-    const analiseProvedoresButton = document.getElementById("analise-provedores-button");
-    const analiseProvedoresSection = document.getElementById("analise-provedores");
-    const mainContent = document.getElementById("main-content");
+    const menuButton = document.getElementById("menu-button");
+    const exp1Button = document.getElementById("exp1-button");
+    const exp2Button = document.getElementById("exp2-button");
+    const exp1Section = document.getElementById("exp1-section");
+    const exp2Section = document.getElementById("exp2-section");
+    const mapContent = document.getElementById('map');
 
-    toggleMenuButton.addEventListener("click", function () {
-        if (sidebar.style.left === "0px") {
-            sidebar.style.left = "-250px";
-            mainContent.style.marginLeft = "0px";
-            toggleMenuButton.style.left = "";
-            toggleMenuButton.style.right = "-50px";
-            toggleMenuButton.innerHTML = "☰";
+    menuButton.addEventListener("click", function () {
+        sidebar.classList.toggle('show');
+        if (sidebar.classList.contains('show')) {
+            menuButton.innerHTML = "✖";
+            menuButton.style.color = '#EE1A40';
+            mapContent.style.width = "calc(100vw - 300px)";
         } else {
-            sidebar.style.left = "0px";
-            mainContent.style.marginLeft = "250px";
-            toggleMenuButton.style.left = "200px";
-            toggleMenuButton.style.right = "";
-            toggleMenuButton.innerHTML = "✖";
+            menuButton.innerHTML = "☰";
+            menuButton.style.color = '#01A5CB';
+            mapContent.style.width = "calc(100vw - 100px)";
         }
-    });
+    })
 
-    alunoFujaoButton.addEventListener("mouseenter", function () {
-        hoverAlunoFujao(true);
-    });
-    alunoFujaoButton.addEventListener("mouseleave", function () {
-        hoverAlunoFujao(false);
-    });
-
-    alunoFujaoButton.addEventListener("click", function () {
-        if (clickedAlunoFujao == false) {
-            hoverAlunoFujao(true);
-            alunoFujaoButton.addEventListener("mouseenter", function () {
-                hoverAlunoFujao(true);
-            });
-            alunoFujaoButton.addEventListener("mouseleave", function () {
-                hoverAlunoFujao(true);
-            });
-            analiseProvedoresButton.addEventListener("mouseenter", function () {
-                hoverAnaliseProvedores(false);
-            });
-            analiseProvedoresButton.addEventListener("mouseleave", function () {
-                hoverAnaliseProvedores(false);
-            });
-            clickedAlunoFujao = true;
-            clickedAnaliseProvedores = true;
-        } else {
-            hoverAlunoFujao(false);
-            alunoFujaoButton.addEventListener("mouseenter", function () {
-                hoverAlunoFujao(true);
-            });
-            alunoFujaoButton.addEventListener("mouseleave", function () {
-                hoverAlunoFujao(false);
-            });
-            hoverAnaliseProvedores(false);
-            analiseProvedoresButton.addEventListener("mouseenter", function () {
-                hoverAnaliseProvedores(true);
-            });
-            analiseProvedoresButton.addEventListener("mouseleave", function () {
-                hoverAnaliseProvedores(false);
-            });
-            clickedAlunoFujao = false;
-            clickedAnaliseProvedores = false;
+    exp1Button.addEventListener("click", function () {
+        exp1Button.classList.toggle('active');
+        if (exp2Button.classList.contains('active')) {
+            exp2Button.classList.toggle('active');
         }
-    });
-
-    analiseProvedoresButton.addEventListener("mouseenter", function () {
-        hoverAnaliseProvedores(true);
-    });
-    analiseProvedoresButton.addEventListener("mouseleave", function () {
-        hoverAnaliseProvedores(false);
-    });
-
-    analiseProvedoresButton.addEventListener("click", function () {
-        if (clickedAnaliseProvedores == false) {
-            hoverAnaliseProvedores(true);
-            analiseProvedoresButton.addEventListener("mouseenter", function () {
-                hoverAnaliseProvedores(true);
-            });
-            analiseProvedoresButton.addEventListener("mouseleave", function () {
-                hoverAnaliseProvedores(true);
-            });
-            alunoFujaoButton.addEventListener("mouseenter", function () {
-                hoverAlunoFujao(false);
-            });
-            alunoFujaoButton.addEventListener("mouseleave", function () {
-                hoverAlunoFujao(false);
-            });
-            clickedAnaliseProvedores = true;
-            clickedAlunoFujao = true;
-        } else {
-            hoverAnaliseProvedores(false);
-            analiseProvedoresButton.addEventListener("mouseenter", function () {
-                hoverAnaliseProvedores(true);
-            });
-            analiseProvedoresButton.addEventListener("mouseleave", function () {
-                hoverAnaliseProvedores(false);
-            });
-            hoverAlunoFujao(false);
-            alunoFujaoButton.addEventListener("mouseenter", function () {
-                hoverAlunoFujao(true);
-            });
-            alunoFujaoButton.addEventListener("mouseleave", function () {
-                hoverAlunoFujao(false);
-            });
-            clickedAnaliseProvedores = false;
-            clickedAlunoFujao = false;
+        exp1Section.classList.toggle('show');
+        if (exp2Section.classList.contains('show')) {
+            exp2Section.classList.toggle('show');
         }
-    });
+        if (exp1Section.classList.contains('show') || exp2Section.classList.contains('show')) {
+            mapContent.style.height = "calc(100vh - 220px)"
+            mapContent.style.top = "180px";
+        }else{
+            mapContent.style.height = "calc(100vh - 100px)"
+            mapContent.style.top = "40px";
+        }
+    })
 
-    var map = L.map('map').setView([-23.5505, -46.6333], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    window.addMainPoint = function () {
-        let lat = parseFloat(document.getElementById("lat").value);
-        let lng = parseFloat(document.getElementById("lng").value);
-        L.marker([lat, lng]).addTo(map)
-            .bindPopup("Ponto Central")
-            .openPopup();
-    };
+    exp2Button.addEventListener("click", function () {
+        exp2Button.classList.toggle('active');
+        if (exp1Button.classList.contains('active')) {
+            exp1Button.classList.toggle('active');
+        }
+        exp2Section.classList.toggle('show');
+        if (exp1Section.classList.contains('show')) {
+            exp1Section.classList.toggle('show');
+        }
+        if (exp1Section.classList.contains('show') || exp2Section.classList.contains('show')) {
+            mapContent.style.height = "calc(100vh - 220px)"
+            mapContent.style.top = "180px";
+        }else{
+            mapContent.style.height = "calc(100vh - 100px)"
+            mapContent.style.top = "40px";
+        }
+    })
 
     window.analisarProvedores = function () {
         Swal.fire("Analisando cobertura das operadoras...");
@@ -314,10 +208,10 @@ async function carregarDispositivos() {
         if (!response.ok) throw new Error(`Erro ao buscar dispositivos: ${response.statusText}`);
 
         const dispositivos = await response.json();
-        console.log("Dispositivos recebidos:", dispositivos);
 
-        const selects = [document.getElementById("devices1"), document.getElementById("devices2")];
+        const selects = [document.getElementById("devices")];
         selects.forEach(select => {
+            if (!select) return; // <-- Adicione esta linha
             select.innerHTML = '<option value="">Selecione um dispositivo</option>';
 
             dispositivos.forEach(dispositivo => {
@@ -335,28 +229,37 @@ async function carregarDispositivos() {
     }
 }
 
-// Chamando a função ao iniciar a página
-document.addEventListener("DOMContentLoaded", carregarDispositivos);
-
-
-// Função para verificar se um ponto está dentro da área delimitada
-function estaDentroDaRegiao(lat, lng, poligono) {
-    let dentro = false;
-    let j = poligono.length - 1;
-    for (let i = 0; i < poligono.length; i++) {
-        if ((poligono[i][1] > lng) !== (poligono[j][1] > lng) &&
-            lat < (poligono[j][0] - poligono[i][0]) * (lng - poligono[i][1]) / (poligono[j][1] - poligono[i][1]) + poligono[i][0]) {
-            dentro = !dentro;
+function limparMapa() {
+    map.eachLayer(function (layer) {
+        if (layer instanceof L.Marker || layer instanceof L.Circle || layer instanceof L.CircleMarker) {
+            map.removeLayer(layer);
+            mainMarker = null;
         }
-        j = i;
-    }
-    return dentro;
+    });
+    Swal.fire({
+        text: "O experimento foi limpo com sucesso!",
+        icon: 'success',
+        timer: 1500,
+        timerProgressBar: false,
+        showConfirmButton: false
+    });
 }
 
 // Função para obter os detalhes do usuário e verificar a localização
 async function verificarAlunoFujao() {
-    const select = document.getElementById("devices1");
+    const select = document.getElementById("devices");
     const deviceId = select.value;
+
+    if (!mainMarker) {
+        Swal.fire({
+            text: "Defina um ponto central primeiro!",
+            icon: 'error',
+            timer: 1500,
+            timerProgressBar: false,
+            showConfirmButton: false
+        });
+        return;
+    }
 
     if (!deviceId) {
         Swal.fire({
@@ -487,7 +390,7 @@ async function analisarProvedores() {
             radius: 8,
             fillOpacity: 1
         }).addTo(map).bindPopup
-        (`Ponto: ${latitude}, ${longitude}<br>Provedor de Internet <strong>${provedorSIM}</strong><br>Intensidade do Sinal <strong>${intensidadeSinal} db</strong>`).openPopup();
+            (`Ponto: ${latitude}, ${longitude}<br>Provedor de Internet <strong>${provedorSIM}</strong><br>Intensidade do Sinal <strong>${intensidadeSinal} db</strong>`).openPopup();
     } catch (error) {
         console.error("Erro ao buscar detalhes do aluno:", error);
         Swal.fire({
@@ -498,4 +401,171 @@ async function analisarProvedores() {
             showConfirmButton: false
         });
     }
+}
+
+async function carregarProvedores() {
+    try {
+        const response = await fetch("http://20.206.200.173:8080/orion-api/ngsi-ld/v1/entities/?type=https%3A%2F%2Furi.fiware.org%2Fns%2Fdata-models%23Device", {
+            headers: { "Accept": "application/ld+json" }
+        });
+
+        if (!response.ok) throw new Error(`Erro ao buscar dispositivos: ${response.statusText}`);
+
+        const dispositivos = await response.json();
+
+        // Filtrar dispositivos válidos (excluindo "N/A" e null)
+        const dispositivosValidos = dispositivos.filter(d => {
+            const provedor = d.provedorSIM?.value;
+            return provedor && provedor.toUpperCase().trim() !== "N/A";
+        });
+
+        // Agrupar dispositivos por nomes normalizados
+        const dispositivosAgrupados = dispositivosValidos.reduce((acc, dispositivo) => {
+            const provedorNormalizado = normalizarProvedor(dispositivo.provedorSIM?.value) || "Desconhecido";
+            if (!acc[provedorNormalizado]) {
+                acc[provedorNormalizado] = [];
+            }
+            acc[provedorNormalizado].push(dispositivo);
+            return acc;
+        }, {});
+
+        // Criar um conjunto de nomes normalizados para o dropdown
+        const provedoresNormalizados = Object.keys(dispositivosAgrupados);
+
+        const providerSelect = document.getElementById("providers");
+        providerSelect.innerHTML = '<option value="">Todos os Provedores</option>'; // Adicionar opção para todos os provedores
+        provedoresNormalizados.forEach(provedor => {
+            const option = document.createElement("option");
+            option.value = provedor;
+            option.textContent = provedor;
+            providerSelect.appendChild(option);
+        });
+
+        // Salvar os dispositivos agrupados para uso posterior
+        window.dispositivosAgrupados = dispositivosAgrupados;
+    } catch (error) {
+        console.error("Erro ao carregar provedores:", error);
+    }
+}
+
+async function plotarPontosOperadora() {
+    try {
+        const providerFilter = document.getElementById("providers").value;
+
+        // Obter os dispositivos agrupados
+        const dispositivosAgrupados = window.dispositivosAgrupados || {};
+
+        // Filtrar dispositivos pelo provedor selecionado
+        const dispositivosParaPlotar = providerFilter
+            ? dispositivosAgrupados[providerFilter] || [] // Apenas dispositivos do provedor selecionado
+            : Object.values(dispositivosAgrupados).flat(); // Todos os dispositivos
+
+        // Limpar camadas anteriores do mapa
+        map.eachLayer(layer => {
+            if (layer instanceof L.CircleMarker) map.removeLayer(layer);
+        });
+
+        // Filtrar dispositivos com intensidade válida (apenas números)
+        const dispositivosFiltrados = dispositivosParaPlotar.filter(dispositivo => {
+            const intensidade = dispositivo.intensidadeSinal?.value;
+            return !isNaN(intensidade); // Verifica se a intensidade é um número
+        });
+
+        // Plotar os pontos no mapa
+        dispositivosFiltrados.forEach(dispositivo => {
+            const lat = dispositivo.localizacao.value.coordinates[1];
+            const lng = dispositivo.localizacao.value.coordinates[0];
+            const intensidade = dispositivo.intensidadeSinal?.value || "Desconhecido";
+            const provedor = dispositivo.provedorSIM?.value || "Desconhecido";
+            const tipotecnologia = dispositivo.tipoSinal?.value || "Desconhecido";
+
+            // Adicionar marcador no mapa
+            const marker = L.circleMarker([lat, lng], {
+                color: provedor === "Claro BR"  ? 'red' : (provedor === "VIVO" || provedor === "Vivo") ? 'purple' : 'blue', // Cor baseada no provedor
+                radius: 8,
+                fillOpacity: 0.8
+            }).addTo(map);
+            
+            marker.bindPopup(
+                `<strong>Provedor:</strong> ${provedor}<br>
+                <strong>Intensidade do Sinal:</strong> ${classificarSinal(intensidade)} (${intensidade} db)<br>
+                <strong>Tecnologia:</strong> ${tipotecnologia} <br>
+                <strong>Localização:</strong> ${lat}, ${lng}`
+            );
+
+            marker.on('mouseover', function () {
+                this.openPopup();
+            });
+            marker.on('mouseout', function () {
+                this.closePopup();
+            });
+        });
+    } catch (error) {
+        console.error("Erro ao plotar pontos no mapa:", error);
+    }
+}
+
+document.getElementById('about-experiences').onclick = function() {
+    Swal.fire({
+        title: 'Sobre as Experiências',
+        html: `
+        <b>Aluno fujão:</b><br>
+        Defina um ponto central (latitude, longitude e raio) e selecione um dispositivo. O sistema verifica se o aluno está dentro ou fora da área definida.<br><br>
+        <b>Cobertura das Operadoras:</b><br>
+        Selecione um provedor ou visualize todos. Clique em "Analisar Cobertura" para ver no mapa a intensidade do sinal dos dispositivos. Passe o mouse sobre os pontos para detalhes.
+        `,
+        icon: 'info',
+        confirmButtonText: 'Fechar'
+    });
+};
+
+// Funções de validação e formatação
+
+// Função para converter graus em radianos
+function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+}
+
+// Função para calcular a distância entre dois pontos
+function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
+    var R = 6371000; // Raio da Terra em metros
+    var dLat = deg2rad(lat2 - lat1);
+    var dLon = deg2rad(lon2 - lon1);
+    var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var distance = R * c; // Distância em metros
+    return distance;
+}
+
+// Variavel constante que normaliza os nomes dos provedores 
+const normalizarProvedor = (nome) => {
+    if (!nome || nome.toUpperCase().trim() == "N/A") return null; // Remove "N/A" e valores nulos
+    const nomeLimpo = nome.toUpperCase().trim();
+    if (nomeLimpo.includes("TIM")) return "TIM";
+    if (nomeLimpo.includes("VIVO")) return "VIVO";
+    if (nomeLimpo.includes("CLARO")) return "Claro BR";
+    return nome; 
+};
+
+// Função para classificar o sinal
+function classificarSinal(dbm) {
+  // Limita o valor de dBm entre -110 e -50
+  if (dbm < -110) dbm = -110;
+  if (dbm > -50) dbm = -50;
+
+  // Normalização
+  const q = (dbm + 110) / 60;
+
+  // Classificação
+  let categoria;
+  if (q < 0.33) {
+    return categoria = "Ruim";
+  } else if (q < 0.58) {
+    return categoria = "Razoável";
+  } else {
+    return categoria = "Bom";
+  }
 }

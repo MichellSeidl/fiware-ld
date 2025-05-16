@@ -14,88 +14,219 @@ body {
     height: 100vh;
 }
 
-/* Estilos do menu lateral */
 #sidebar {
-    position: fixed;
-    left: -250px;
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background: var(--black);
-    color: var(--white);
-    transition: left 0.3s ease;
-    padding-top: 60px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    padding: 20px;
+    max-width: 20px;
+    min-width: 20px;
+    max-height: 20px;
+    min-height: 20px;
+    border: 1px solid;
+    border-color: var(--black) var(--blue) var(--blue) var(--black);
+    border-radius: 50%;
+    transition:
+        max-width 0.3s ease,
+        min-width 0.3s ease,
+        max-height 0.3s ease,
+        min-height 0.3s ease,
+        border-radius 0.3s ease,
+        border-color 0.3s ease;
 }
 
-#sidebar ul {
+#sidebar.show {
+    padding: 20px;
+    max-width: 210px;
+    min-width: 210px;
+    max-height: 100%;
+    min-height: 100%;
+    border: 1px solid;
+    border-color: var(--black) var(--blue) var(--black) var(--black);
+    border-radius: 0%;
+}
+
+#sidebar.show ul {
     list-style: none;
     padding: 0;
 }
 
-#sidebar ul li {
+#sidebar.show ul li {
     padding: 14px;
-    text-align: left; 
-}
-
-#sidebar ul li button {
-    background: none;
-    border: none;
     text-align: left;
-    color: var(--yellow);
-    font-size: 16px;
     cursor: pointer;
+}
+
+#sidebar.show ul li.active {
+    text-align: center;
+    border: 1px solid;
+    border-color: var(--black) var(--black) var(--yellow) var(--black);
+    padding-bottom: 0;
+    margin-bottom: 14px;
+    font-weight: bold;
+}
+
+.menu-content {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#sidebar.show .menu-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+.menu-button {
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+    font-size: large;
+    color: var(--blue);
+}
+
+#exp1-section {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0px;
+    min-height: 0px;
+    transition: max-height 0.3s ease,
+        min-height 0.3s ease;
+}
+
+#exp1-section.show {
+    visibility: visible;
+    opacity: 1;
+    max-height: 100px;
+    min-height: 100px;
     width: 100%;
-    transition: left 0.3s ease;
 }
 
-#aluno-fujao{
-    top:-200px;
-    position: absolute;
-    height: 150px;
+#exp2-section {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0px;
+    min-height: 0px;
+    transition: max-height 0.3s ease,
+        min-height 0.3s ease;
+}
+
+#exp2-section.show {
+    visibility: visible;
+    opacity: 1;
+    max-height: 100px;
+    min-height: 100px;
     width: 100%;
-    z-index: 10000;
-    transition: top 0.3s ease;
-    border: var(--black) 1px solid;
-    border-radius: 0.375em;
-    background-color: var(--black);
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
 }
 
-#analise-provedores{
-    top:-200px;
-    position: absolute;
-    height: 150px;
-    width: 100%;
-    z-index: 10000;
-    transition: top 0.3s ease;
-    border: var(--black) 1px solid;
-    border-radius: 0.375em;
-    background-color: var(--black);
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-}
-
-#toggle-menu:hover + #aluno-fujao {
-    top: 0px; 
-}
-
-
-/* Botão para abrir/fechar menu */
-#toggle-menu {
-    position: absolute;
-    top: 10px;
-    right: -50px;
-    background: var(--blue);
+#about-experiences {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
     color: var(--white);
+    background-color: var(--blue);
+    border-radius: 0.375em;
     border: none;
-    padding: 10px;
     cursor: pointer;
-    font-size: 20px;
-    border-radius: 0.375rem;
-    width: 50px;
-    height: 50px;
-    transition: right 0.3s ease;
+    font-weight: bold;
+    font-size: 16px;
+    width: 90%;
+}
+
+#about-experiences:hover {
+    background-color: #006dd3;
+}
+
+#clear-experiment {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    color: var(--white);
+    background-color: var(--yellow);
+    border-radius: 0.375em;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    width: 90%;
+}
+
+#clear-experiment:hover {
+    background-color: #f5c842;
+}
+
+button {
+    padding: 7px 14px;
+    color: var(--white);
+    background-color: var(--blue);
+    border-radius: 0.375em;
+    border: none;
+    cursor: pointer;
+}
+
+button.increment {
+    height: 29px;
+    background-color: var(--black);
+    border-radius: 0em 0.375em 0.375em 0em;
+    border: var(--white) 1px solid;
+    font-weight: bold;
+    color: var(--white);
+    font-size: 16px;
+}
+
+button.decrement {
+    height: 29px;
+    background-color: var(--black);
+    border-radius: 0.375em 0em 0em 0.375em;
+    border: var(--white) 1px solid;
+    font-weight: bold;
+    color: var(--white);
+    font-size: 16px;
+}
+
+.exp1-second-row {
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.exp1-second-row>label {
+    display: flex;
+    align-items: center;
+}
+
+.exp1-first-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+select {
+    height: 30px;
+    width: 200px;
+    border-radius: 0.375em;
+}
+
+input {
+    height: 25px;
+    width: 100px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    text-align: center;
+}
+
+input:focus {
+    border-color: #01A5CB;
+    outline: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 /* Ajustando o conteúdo principal para acompanhar o menu */
@@ -103,19 +234,21 @@ body {
     position: relative;
     left: 0;
     width: 100%;
-    transition: margin-left 0.3s ease;
     padding: 20px;
 }
 
 /* Ajustando o mapa para respeitar a largura */
 #map {
-    width: 100%;
+    width: calc(100vw - 100px);
+    position: absolute;
     top: 40px;
     height: calc(100vh - 100px);
+    transition: height 0.3s ease,
+        width 0.3s ease,
+        top 0.3s ease;
     margin-top: 20px;
     border-radius: 0.375em;
 }
 
 /* Responsividade para telas menores */
-@media (max-width: 768px) {
-}
+@media (max-width: 768px) {}
