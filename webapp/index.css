@@ -180,6 +180,12 @@ button.decrement {
     font-size: 16px;
 }
 
+.exp1-first-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .exp1-second-row {
     margin-top: 3px;
     display: flex;
@@ -192,22 +198,17 @@ button.decrement {
     align-items: center;
 }
 
-.exp1-first-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-select {
+select,
+#instituicao-relacionada {
     height: 30px;
-    width: 200px;
+    width: 230px;
     border-radius: 0.375em;
 }
 
 input {
     height: 25px;
     width: 100px;
-    font-size: 16px;
+    
     transition: border-color 0.3s ease;
     text-align: center;
 }
@@ -248,6 +249,47 @@ input[type=number] {
         top 0.3s ease;
     margin-top: 20px;
     border-radius: 0.375em;
+}
+
+/* SweetAlert2 customização para fundo preto e letras brancas */
+.swal-custom-popup {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border-radius: 0.375em;
+    width: 40%;
+}
+
+.swal-custom-popup .swal2-title,
+.swal-custom-popup .swal2-html-container,
+.swal-custom-popup label {
+    color: var(--white) !important;
+}
+
+.swal-custom-input,
+.swal-custom-textarea {
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--blue) !important;
+    border-radius: 0.375em;
+    width: 60%;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.swal-custom-confirm {
+    background: var(--blue) !important;
+    color: var(--white) !important;
+    border-radius: 0.375em;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.swal-custom-cancel {
+    background: var(--yellow) !important;
+    color: var(--black) !important;
+    border-radius: 0.375em;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 /* Responsividade para telas menores */

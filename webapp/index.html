@@ -18,9 +18,9 @@
                 <li id="exp1-button">Aluno fujão</li>
                 <li id="exp2-button">Cobertura das Operadoras</li>
             </ul>
-        <button id="about-experiences">Sobre</button>
-        <!-- Botão para limpar qualquer experimento -->
-        <button id="clear-experiment" onclick="limparMapa()">Limpar Experimento</button>
+            <button id="about-experiences">Sobre</button>
+            <!-- Botão para limpar qualquer experimento -->
+            <button id="clear-experiment" onclick="limparMapa()">Limpar Experimento</button>
         </div>
     </nav>
 
@@ -29,31 +29,19 @@
             <h2>Análise de Alunos presentes na Instituição</h2>
             <div class="controls">
                 <div id="device-selector" class="exp1-first-row">
-                    <div>
-                        <label for="devices">Selecione um dispositivo:</label>
-                        <select id="devices">
-                        </select>
-                    </div>
-                    <div>&nbsp;</div>
-                    <div>&nbsp;</div>
-                    <button onclick="verificarAlunoFujao()">Aluno Fujão</button>
+                    <button onclick="abrirModalInstituicaoSwal()">Cadastrar Instituição</button>
+                    <button onclick="abrirModalConsultaInstituicaoSwal()">Atribuir Relacionamento</button>
                 </div>
-
-
                 <div class="exp1-second-row">
-                    <label>Latitude: <div>&nbsp;</div> <button class="decrement"
-                            onclick="decrement('lat')">-</button><input type="number" id="lat" step="any"
-                            value="-23.739205815868356"><button class="increment"
-                            onclick="increment('lat')">+</button></label>
-                    <label>Longitude: <div>&nbsp;</div><button class="decrement"
-                            onclick="decrement('lng')">-</button><input type="number" id="lng" step="any"
-                            value="-46.583589560375515"><button class="increment"
-                            onclick="increment('lng')">+</button></label>
-                    <label>Distância (km): <div>&nbsp;</div><button class="decrement"
-                            onclick="decrement('distance')">-</button><input type="number" id="distance" step="any"
-                            value="0.5"><button class="increment" onclick="increment('distance')">+</button></label>
-                    <button onclick="addMainPoint()">Definir Ponto Central</button>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <label for="devices">Selecione um dispositivo:</label>
+                        <select id="devices"></select>
+                        <label for="instituicao-relacionada">Instituição:</label>
+                        <input type="text" id="instituicao-relacionada" placeholder="Instituição relacionada" readonly />
+                    </div>
+                    <button onclick="verificarAlunoInstituicao()">Aluno Fujão</button>
                 </div>
+                
             </div>
         </div>
 

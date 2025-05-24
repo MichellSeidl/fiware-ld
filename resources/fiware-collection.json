@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "4eff7f51-b86b-462c-888c-7fa6ae7daf62",
+		"name": "TCC - Relacionamento de Entidades",
+		"description": "StartFragment\n\nEsta collection contém requisições voltadas para a **consulta e gerenciamento de entidades do tipo** **`Device`** **e** **`Building`**, representando dispositivos móveis e instituições de ensino, respectivamente.\n\nInclui chamadas responsáveis por:\n\n- Consultar entidades existentes do tipo `Device`.\n    \n- Realizar a **criação da entidade** **`Building`**, que representa a localização geográfica da instituição de ensino.\n    \n- Estabelecer **relacionamentos (relationships)** entre dispositivos e a instituição, permitindo o uso de **Linked Data** conforme o padrão **NGSI-LD** para representar presença, localização e outras conexões semânticas entre as entidades.\n    \n\nEssas operações fazem parte da modelagem semântica no contexto do projeto FIWARE-LD.\n\nEndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38361029"
+	},
+	"item": [
+		{
+			"name": "Orion-LD - Verificar Versão da API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{localhost}}:1026/version",
+					"protocol": "http",
+					"host": [
+						"{{localhost}}"
+					],
+					"port": "1026",
+					"path": [
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta de Dispositivos - NGSI-LD",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{localhost}}:1026/ngsi-ld/v1/entities/?type=https%3A%2F%2Furi.fiware.org%2Fns%2Fdata-models%23Device",
+					"protocol": "http",
+					"host": [
+						"{{localhost}}"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						""
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "https%3A%2F%2Furi.fiware.org%2Fns%2Fdata-models%23Device"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta de Instituições - NGSI-LD",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{localhost}}:1026/ngsi-ld/v1/entities?type=https%3A%2F%2Furi.fiware.org%2Fns%2Fdata-models%23Building",
+					"protocol": "http",
+					"host": [
+						"{{localhost}}"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "https%3A%2F%2Furi.fiware.org%2Fns%2Fdata-models%23Building"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criando o Relacionamento do Building e Devices",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Link",
+						"value": "<http://context/user-context.jsonld>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"urn:ngsi-ld:SWDK6601\",\n        \"type\": \"https://uri.fiware.org/ns/data-models#Device\",\n        \"controlledAsset\": {\n            \"type\": \"Relationship\",\n            \"object\": \"urn:ngsi-ld:Building:faculdadeengenheirosalvadorarena\"\n        }\n    }\n]\n"
+				},
+				"url": {
+					"raw": "http://{{localhost}}:1026/ngsi-ld/v1/entityOperations/update?options=update",
+					"protocol": "http",
+					"host": [
+						"{{localhost}}"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entityOperations",
+						"update"
+					],
+					"query": [
+						{
+							"key": "options",
+							"value": "update"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criação do Building(Faculdade) com relacionamento do Device",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/ld+json",
+						"type": "text"
+					},
+					{
+						"key": "Link",
+						"value": "<http://uri.fiware.org/ns/data-models/context.jsonld>;rel=\"http://www.w3.org/ns/json-ld#context\";type=\"application/ld+json\"",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"urn:ngsi-ld:Building:faculdade001\",\r\n  \"type\": \"https://uri.fiware.org/ns/data-models#Building\",\r\n  \"name\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"Faculdade Salvador Arena\"\r\n  },\r\n  \"location\": {\r\n    \"type\": \"GeoProperty\",\r\n    \"value\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [-46.5825209, -23.6815319]\r\n    }\r\n  },\r\n  \"https://uri.fiware.org/ns/data-models#hasDevice\": {\r\n    \"type\": \"Relationship\",\r\n    \"object\": \"urn:ngsi-ld:SWDK6601\"\r\n  },\r\n  \"@context\": [\r\n    {\r\n      \"name\": \"https://schema.org/name\",\r\n      \"location\": \"http://www.w3.org/2003/01/geo/wgs84_pos#location\",\r\n      \"hasDevice\": \"https://uri.fiware.org/ns/data-models#hasDevice\"\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{localhost}}:1026/ngsi-ld/v1/entities/",
+					"protocol": "http",
+					"host": [
+						"{{localhost}}"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta os Dispositivos filtrando pela Instituição",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{localhost}}:1026/ngsi-ld/v1/entities?q=controlledAsset==\"urn:ngsi-ld:Building:faculdadeengenheirosalvadorarena\"",
+					"protocol": "http",
+					"host": [
+						"{{localhost}}"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entities"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "controlledAsset==\"urn:ngsi-ld:Building:faculdadeengenheirosalvadorarena\""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

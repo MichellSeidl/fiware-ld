@@ -1,0 +1,816 @@
+[
+    {
+        "id": "c38cad85ec437cc0",
+        "type": "tab",
+        "label": "Fluxo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "205e0c7dc10f8365",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-custom",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#01a5c8",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#4B7930",
+                    "value": "#01a5c8",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#01a5c8",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#26252b",
+                    "edited": true
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#18d5fe",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#01a5c8",
+                    "edited": true
+                },
+                "group-backgroundColor": {
+                    "value": "#26252b",
+                    "edited": true
+                },
+                "widget-textColor": {
+                    "value": "#ffffff",
+                    "edited": true
+                },
+                "widget-backgroundColor": {
+                    "value": "#01a5c8",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#26252b",
+                    "edited": true
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 8,
+                "cx": 6,
+                "cy": 19,
+                "px": 0,
+                "py": 18
+            }
+        }
+    },
+    {
+        "id": "b307c78b2e8889b6",
+        "type": "ui_tab",
+        "name": "Dashboard de Monitoramento",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "1fcd501100c708e0",
+        "type": "ui_group",
+        "name": "Entradas",
+        "tab": "b307c78b2e8889b6",
+        "order": 1,
+        "disp": true,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fce3c81ae0df6f43",
+        "type": "ui_group",
+        "name": "Dados",
+        "tab": "b307c78b2e8889b6",
+        "order": 2,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5e3d3fcb93bd6985",
+        "type": "ui_group",
+        "name": "Group 4",
+        "tab": "b307c78b2e8889b6",
+        "order": 3,
+        "disp": false,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3e13888097f9c2f2",
+        "type": "ui_group",
+        "name": "Group 5",
+        "tab": "b307c78b2e8889b6",
+        "order": 4,
+        "disp": false,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "217be4942c56ebfe",
+        "type": "ui_group",
+        "name": "Dados Operadora",
+        "tab": "b307c78b2e8889b6",
+        "order": 5,
+        "disp": true,
+        "width": 7,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "921e54226746e4fe",
+        "type": "inject",
+        "z": "c38cad85ec437cc0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "null",
+        "payloadType": "json",
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "161b1fa7aa8e3a37"
+            ]
+        ]
+    },
+    {
+        "id": "161b1fa7aa8e3a37",
+        "type": "http request",
+        "z": "c38cad85ec437cc0",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://orion:1026/ngsi-ld/v1/entities/?type=https%3A%2F%2Furi.fiware.org%2Fns%2Fdata-models%23Device",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 240,
+        "y": 120,
+        "wires": [
+            [
+                "d3e8f9d7c0bba0a9"
+            ]
+        ]
+    },
+    {
+        "id": "d3e8f9d7c0bba0a9",
+        "type": "function",
+        "z": "c38cad85ec437cc0",
+        "name": "function 3",
+        "func": "try {\n    // Tenta converter a string JSON em um array\n    const jsonData = JSON.parse(msg.payload);\n\n    // Verifica se jsonData é um array\n    if (Array.isArray(jsonData)) {\n        // Extrair os IDs\n        const ids = jsonData.map(item => item.id);\n        \n        // Definir a saída\n        msg.payload = ids;\n    } else {\n        // Se não for um array, retorna um erro ou uma mensagem padrão\n        msg.payload = \"Erro: A entrada não é um array.\";\n    }\n} catch (error) {\n    // Se ocorrer um erro ao analisar a string JSON\n    msg.payload = \"Erro ao analisar JSON: \" + error.message;\n}\n\n// Retornar a mensagem\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 60,
+        "wires": [
+            [
+                "78290c68e9e977f9",
+                "981c3450bbef6690"
+            ]
+        ]
+    },
+    {
+        "id": "78290c68e9e977f9",
+        "type": "debug",
+        "z": "c38cad85ec437cc0",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "981c3450bbef6690",
+        "type": "function",
+        "z": "c38cad85ec437cc0",
+        "name": "function 4",
+        "func": "msg.options = msg.payload;\n\n// Salva a quantidade de registros no contador\nmsg.count = Array.isArray(msg.payload) ? msg.payload.length : 0;\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 140,
+        "wires": [
+            [
+                "e3d47abc1310746a",
+                "de6f36abd0630b0d"
+            ]
+        ]
+    },
+    {
+        "id": "c8e8984c4e7e9147",
+        "type": "debug",
+        "z": "c38cad85ec437cc0",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "9cba4548bdbca893",
+        "type": "function",
+        "z": "c38cad85ec437cc0",
+        "name": "function 5",
+        "func": "// Monta a URL para consulta no Orion-LD\nmsg.url = `http://orion:1026/ngsi-ld/v1/entities/${msg.payload}?options=sysAttrs`;\n\n// Grava o valor do msg.payload no contexto de fluxo\nflow.set('valorAtual', msg.url);\n\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 220,
+        "wires": [
+            [
+                "fdd0cfbc93e4eb21",
+                "08d9853781781b5d"
+            ]
+        ]
+    },
+    {
+        "id": "fdd0cfbc93e4eb21",
+        "type": "debug",
+        "z": "c38cad85ec437cc0",
+        "name": "debug 7",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "url",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "5969407f1217ac8b",
+        "type": "function",
+        "z": "c38cad85ec437cc0",
+        "name": "function 6",
+        "func": "let data = msg.payload;\n\n// Função para extrair apenas números de uma string\nfunction extractNumber(value) {\n    if (typeof value === \"string\") {\n        let num = value.match(/-?\\d+(\\.\\d+)?/); // Captura números inteiros ou decimais (positivos e negativos)\n        return num ? parseFloat(num[0]) : null; // Converte para número ou retorna null se não encontrar\n    }\n    return value; // Se já for numérico, retorna direto\n}\n\n// Extrai os valores do JSON retornado pelo Orion-LD\nmsg.payload = {\n    device_id: data.id.replace(\"urn:ngsi-ld:\", \"\"), // Remove o prefixo URN\n    marca: data.marca?.value || \"N/A\",  // Se não houver valor, retorna \"N/A\"\n    modelo: data.modelo?.value || \"N/A\",  // Se não houver valor, retorna \"N/A\"\n    localizacao: data.localizacao?.value?.coordinates || [0, 0], // Latitude e Longitude\n    ultimaMedicao: data.ultimaMedicao?.value || \"N/A\", // Data da última medição\n    provedorSIM: data.provedorSIM?.value || \"N/A\",\n    tipoSinal: data.tipoSinal?.value || \"N/A\",\n    intensidadeSinal: extractNumber(data.intensidadeSinal?.value || \"N/A\"),\n    acelerometro: {\n        x: extractNumber(data.acelerometro?.value?.x),  // Extrai número de x\n        y: extractNumber(data.acelerometro?.value?.y),  // Extrai número de y\n        z: extractNumber(data.acelerometro?.value?.z)   // Extrai número de z\n    },\n    giroscopio: {\n        x: extractNumber(data.giroscopio?.value?.x),  // Extrai número de x\n        y: extractNumber(data.giroscopio?.value?.y),  // Extrai número de y\n        z: extractNumber(data.giroscopio?.value?.z)   // Extrai número de z\n    },\n    barometro: data.barometro?.value || \"N/A\",\n    magnetometro: {\n        x: extractNumber(data.magnetometro?.value?.x),  // Extrai número de x\n        y: extractNumber(data.magnetometro?.value?.y),  // Extrai número de y\n        z: extractNumber(data.magnetometro?.value?.z)   // Extrai número de z\n    },\n    temperatura: extractNumber(data.temperatura?.value),  // Extrai número\n    umidade: extractNumber(data.umidade?.value),  // Extrai número\n    luzAmbiente: extractNumber(data.luzAmbiente?.value),  // Extrai número\n    passos: extractNumber(data.passos?.value),  // Extrai número\n    ruido: extractNumber(data.ruido?.value)  // Extrai número\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 340,
+        "wires": [
+            [
+                "c373ea447f10d755",
+                "6d48284782da0f38",
+                "c91552babde7e16e",
+                "1e7a005920753490",
+                "da93933d11c8a78c",
+                "df7d8e31e10c2669",
+                "3a4d5b461d4723d6",
+                "3c4312b484a8ed44",
+                "8910be78b5e66fe5",
+                "4a75fec5b8214efc",
+                "f029b7d8c7ae04e6",
+                "b9d28fa9d8a70b26",
+                "4cbb0717f8bbd2aa",
+                "499daaff8a080f1f",
+                "1fa9f1b56c7d8abf"
+            ]
+        ]
+    },
+    {
+        "id": "c373ea447f10d755",
+        "type": "debug",
+        "z": "c38cad85ec437cc0",
+        "name": "debug 8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "08d9853781781b5d",
+        "type": "http request",
+        "z": "c38cad85ec437cc0",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 620,
+        "y": 280,
+        "wires": [
+            [
+                "c8e8984c4e7e9147",
+                "5969407f1217ac8b"
+            ]
+        ]
+    },
+    {
+        "id": "3766ba7102b7d5aa",
+        "type": "inject",
+        "z": "c38cad85ec437cc0",
+        "name": "",
+        "props": [
+            {
+                "p": "url",
+                "v": "valorAtual",
+                "vt": "flow"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 420,
+        "y": 280,
+        "wires": [
+            [
+                "08d9853781781b5d"
+            ]
+        ]
+    },
+    {
+        "id": "e3d47abc1310746a",
+        "type": "ui_dropdown",
+        "z": "c38cad85ec437cc0",
+        "name": "Dispositivos",
+        "label": "Dispositivos",
+        "tooltip": "",
+        "place": "Selecione um dispositivo",
+        "group": "1fcd501100c708e0",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "",
+                "value": "msg.options",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 650,
+        "y": 140,
+        "wires": [
+            [
+                "9cba4548bdbca893"
+            ]
+        ]
+    },
+    {
+        "id": "6d48284782da0f38",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "fce3c81ae0df6f43",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Marca",
+        "format": "{{msg.payload.marca}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 850,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "c91552babde7e16e",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "fce3c81ae0df6f43",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Modelo",
+        "format": "{{msg.payload.modelo}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 860,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "1e7a005920753490",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "fce3c81ae0df6f43",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Localização",
+        "format": "{{msg.payload.localizacao}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 870,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "da93933d11c8a78c",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "fce3c81ae0df6f43",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Passos",
+        "format": "{{msg.payload.passos}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 860,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "8910be78b5e66fe5",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "fce3c81ae0df6f43",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Magnetometro",
+        "format": "{{msg.payload.magnetometro}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 880,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "4a75fec5b8214efc",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "fce3c81ae0df6f43",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Ultima Medição",
+        "format": "{{msg.payload.ultimaMedicao}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 880,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "f029b7d8c7ae04e6",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "217be4942c56ebfe",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Provedor SIM",
+        "format": "{{msg.payload.provedorSIM}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 880,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "b9d28fa9d8a70b26",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "217be4942c56ebfe",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Tipo sinal",
+        "format": "{{msg.payload.tipoSinal}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 860,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "4cbb0717f8bbd2aa",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "217be4942c56ebfe",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Intensidade sinal",
+        "format": "{{msg.payload.intensidadeSinal}} db",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 890,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "499daaff8a080f1f",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "fce3c81ae0df6f43",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Barometro",
+        "format": "{{msg.payload.barometro}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 870,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "df7d8e31e10c2669",
+        "type": "ui_gauge",
+        "z": "c38cad85ec437cc0",
+        "name": "",
+        "group": "3e13888097f9c2f2",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "°C",
+        "format": "{{msg.payload.temperatura}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "gauge-widget",
+        "x": 590,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "3a4d5b461d4723d6",
+        "type": "ui_gauge",
+        "z": "c38cad85ec437cc0",
+        "name": "",
+        "group": "5e3d3fcb93bd6985",
+        "order": 1,
+        "width": 6,
+        "height": 5,
+        "gtype": "donut",
+        "title": "Umidade",
+        "label": "%",
+        "format": "{{msg.payload.umidade}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "donut-widget",
+        "x": 580,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "3c4312b484a8ed44",
+        "type": "ui_gauge",
+        "z": "c38cad85ec437cc0",
+        "name": "",
+        "group": "5e3d3fcb93bd6985",
+        "order": 2,
+        "width": 6,
+        "height": 4,
+        "gtype": "wave",
+        "title": "Luz Ambiente",
+        "label": "Lux",
+        "format": "{{msg.payload.luzAmbiente}}",
+        "min": 0,
+        "max": "500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 600,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "1fa9f1b56c7d8abf",
+        "type": "ui_gauge",
+        "z": "c38cad85ec437cc0",
+        "name": "",
+        "group": "3e13888097f9c2f2",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Ruído",
+        "label": "db",
+        "format": "{{msg.payload.ruido}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 570,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "de6f36abd0630b0d",
+        "type": "ui_text",
+        "z": "c38cad85ec437cc0",
+        "group": "1fcd501100c708e0",
+        "order": 2,
+        "width": 7,
+        "height": 3,
+        "name": "",
+        "label": "Quantidade de Dispositivos",
+        "format": "{{msg.count}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "30",
+        "color": "#ffffff",
+        "x": 700,
+        "y": 100,
+        "wires": []
+    }
+]

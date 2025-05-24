@@ -36,14 +36,32 @@ O serviço `webapp` utiliza o NGINX para:
 ```plaintext
 http://localhost:8080/orion-api/ngsi-ld/v1/entities
 ```
+## 📬 Collection do Postman (Material para experimentação)
+
+Aqui você encontrará um conjunto de collections desenvolvidas para serem importadas na ferramenta **Postman**, facilitando a interação com os componentes do **FIWARE** e o modelo de dados **NGSI-LD**.
+
+### 🔗 Collection oficial da FIWARE Foundation
+A **FIWARE Foundation** disponibiliza uma collection pública com exemplos completos de uso do Orion-LD e conceitos de Linked Data:
+
+👉 [Acessar collection oficial no Postman](https://www.postman.com/fiware/fiware-foundation-ev-s-public-workspace/folder/gthdx5a/linked-data-using-orion-ld)
+
+### 📁 Collection do Projeto (Experiência prática)
+Esta collection foi criada especialmente para este projeto e contém chamadas reais utilizadas nos testes e validações da solução. Inclui exemplos de:
+
+- Criação de entidades do tipo `Building` para representar instituições de ensino.
+- Criação e consulta de entidades do tipo `Device`.
+- Estabelecimento de relacionamentos entre entidades com base no modelo NGSI-LD.
+
+👉 [Download da Collection FIWARE (JSON)](./resources/fiware-collection.json)
+
+### 💡 Como importar no Postman
+
+1. Abra o Postman.
+2. Vá em **File > Import**.
+3. Selecione o arquivo `.json` salvo localmente.
+4. Pronto! Agora você pode executar os endpoints e explorar as interações com a API Orion-LD.
 
 
-## Collection do Postman (Material para experimentação)
-
-Aqui você vai encontrar um conjunto de collections desenvolvidas para serem importadas pela ferramenta Postman. Essa collection vai ajudá-lo a interagir com os componentes do **FIWARE** e **NGSI-LD**.
-
-[Click aqui](https://www.postman.com/fiware/fiware-foundation-ev-s-public-workspace/folder/gthdx5a/linked-data-using-orion-ld)
-para acessar a collection do Postman
 
 # Comparativo entre FIWARE NGSIv2 e FIWARE NGSI-LD
 
@@ -80,6 +98,20 @@ para acessar a collection do Postman
 3. Acesse os serviços:
    - **Orion-LD**: `http://localhost:1026`
    - **Node-RED**: `http://localhost:1880`
+
+## Observações Importantes para o Node-RED
+
+Ao acessar o **Node-RED** pela primeira vez (`http://localhost:1880`):
+
+1. Clique no menu lateral direito e selecione **Gerenciador de Paleta**.
+2. Procure e instale o pacote **node-red-dashboard** (conforme ilustrado na imagem abaixo):
+
+   ![image](images/Configuração%20Node-RED.png)
+
+3. Ainda no menu lateral, clique em **Importar** e selecione o arquivo de fluxo do dashboard localizado em 
+ [Download do Dashboard(JSON)](./resources/fluxo-node_red.json.json)
+ 
+Assim, você terá acesso ao dashboard de monitoramento pronto para uso.
 
 ## Links de Produção
 
